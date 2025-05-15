@@ -3,30 +3,37 @@ using Microsoft.EntityFrameworkCore;
 using CornerStore.Models;
 public class CornerStoreDbContext : DbContext
 {
+    public DbSet<Cashier> Cashiers { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderProduct> OrderProducts { get; set; }
 
     public CornerStoreDbContext(DbContextOptions<CornerStoreDbContext> context) : base(context)
     {
-
     }
 
-    //allows us to configure the schema when migrating as well as seed data
+    // Allows us to configure the schema when migrating as well as seed data
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Cashier>().HasData(
+        modelBuilder.Entity<Cashier>().HasData(new Cashier[]
+        {
             new Cashier { Id = 1, FirstName = "Alice", LastName = "Smith" },
             new Cashier { Id = 2, FirstName = "Bob", LastName = "Johnson" },
             new Cashier { Id = 3, FirstName = "Charlie", LastName = "Williams" },
             new Cashier { Id = 4, FirstName = "David", LastName = "Brown" },
             new Cashier { Id = 5, FirstName = "Eve", LastName = "Davis" }
-        );
+        });
 
-        modelBuilder.Entity<Category>().HasData(
+        modelBuilder.Entity<Category>().HasData(new Category[]
+        {
             new Category { Id = 1, CategoryName = "Electronics" },
             new Category { Id = 2, CategoryName = "Clothing" },
             new Category { Id = 3, CategoryName = "Home Goods" }
-        );
+        });
 
-        modelBuilder.Entity<Product>().HasData(
+        modelBuilder.Entity<Product>().HasData(new Product[]
+        {
             new Product { Id = 1, CategoryId = 1, ProductName = "Laptop", Price = 1200.00M, Brand = "Generic" },
             new Product { Id = 2, CategoryId = 1, ProductName = "Smartphone", Price = 800.00M, Brand = "Generic" },
             new Product { Id = 3, CategoryId = 2, ProductName = "T-Shirt", Price = 25.00M, Brand = "Generic" },
@@ -37,9 +44,10 @@ public class CornerStoreDbContext : DbContext
             new Product { Id = 8, CategoryId = 2, ProductName = "Jacket", Price = 120.00M, Brand = "Generic" },
             new Product { Id = 9, CategoryId = 3, ProductName = "Toaster", Price = 30.00M, Brand = "Generic" },
             new Product { Id = 10, CategoryId = 1, ProductName = "Headphones", Price = 150.00M, Brand = "Generic" }
-        );
+        });
 
-        modelBuilder.Entity<Order>().HasData(
+        modelBuilder.Entity<Order>().HasData(new Order[]
+        {
             new Order { Id = 1, CashierId = 1, PaidOnDate = DateTime.Now },
             new Order { Id = 2, CashierId = 2, PaidOnDate = DateTime.Now },
             new Order { Id = 3, CashierId = 3, PaidOnDate = DateTime.Now },
@@ -52,9 +60,10 @@ public class CornerStoreDbContext : DbContext
             new Order { Id = 10, CashierId = 5, PaidOnDate = DateTime.Now },
             new Order { Id = 11, CashierId = 1, PaidOnDate = DateTime.Now },
             new Order { Id = 12, CashierId = 2, PaidOnDate = DateTime.Now }
-        );
+        });
 
-        modelBuilder.Entity<OrderProduct>().HasData(
+        modelBuilder.Entity<OrderProduct>().HasData(new OrderProduct[]
+        {
             new OrderProduct { Id = 1, OrderId = 1, ProductId = 1 },
             new OrderProduct { Id = 2, OrderId = 1, ProductId = 2 },
             new OrderProduct { Id = 3, OrderId = 2, ProductId = 3 },
@@ -79,6 +88,6 @@ public class CornerStoreDbContext : DbContext
             new OrderProduct { Id = 22, OrderId = 11, ProductId = 4 },
             new OrderProduct { Id = 23, OrderId = 12, ProductId = 6 },
             new OrderProduct { Id = 24, OrderId = 12, ProductId = 8 }
-        );
+        });
     }
 }
