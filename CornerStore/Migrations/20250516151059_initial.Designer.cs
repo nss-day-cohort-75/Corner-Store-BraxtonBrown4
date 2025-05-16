@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CornerStore.Migrations
 {
     [DbContext(typeof(CornerStoreDbContext))]
-    [Migration("20250515212123_initial")]
+    [Migration("20250516151059_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -136,73 +136,73 @@ namespace CornerStore.Migrations
                         {
                             Id = 1,
                             CashierId = 1,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3100)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1320)
                         },
                         new
                         {
                             Id = 2,
                             CashierId = 2,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3140)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1400)
                         },
                         new
                         {
                             Id = 3,
                             CashierId = 3,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3150)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1400)
                         },
                         new
                         {
                             Id = 4,
                             CashierId = 4,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3150)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1410)
                         },
                         new
                         {
                             Id = 5,
                             CashierId = 5,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3150)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1410)
                         },
                         new
                         {
                             Id = 6,
                             CashierId = 1,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3150)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1410)
                         },
                         new
                         {
                             Id = 7,
                             CashierId = 2,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3160)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1420)
                         },
                         new
                         {
                             Id = 8,
                             CashierId = 3,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3160)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1420)
                         },
                         new
                         {
                             Id = 9,
                             CashierId = 4,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3160)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1420)
                         },
                         new
                         {
                             Id = 10,
                             CashierId = 5,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3160)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1420)
                         },
                         new
                         {
                             Id = 11,
                             CashierId = 1,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3170)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1430)
                         },
                         new
                         {
                             Id = 12,
                             CashierId = 2,
-                            PaidOnDate = new DateTime(2025, 5, 15, 16, 21, 23, 221, DateTimeKind.Local).AddTicks(3170)
+                            PaidOnDate = new DateTime(2025, 5, 16, 10, 10, 58, 865, DateTimeKind.Local).AddTicks(1430)
                         });
                 });
 
@@ -237,168 +237,168 @@ namespace CornerStore.Migrations
                             Id = 1,
                             OrderId = 1,
                             ProductId = 1,
-                            Quantity = 0
+                            Quantity = 1
                         },
                         new
                         {
                             Id = 2,
                             OrderId = 1,
                             ProductId = 2,
-                            Quantity = 0
+                            Quantity = 2
                         },
                         new
                         {
                             Id = 3,
                             OrderId = 2,
                             ProductId = 3,
-                            Quantity = 0
+                            Quantity = 3
                         },
                         new
                         {
                             Id = 4,
                             OrderId = 2,
                             ProductId = 4,
-                            Quantity = 0
+                            Quantity = 4
                         },
                         new
                         {
                             Id = 5,
                             OrderId = 3,
                             ProductId = 5,
-                            Quantity = 0
+                            Quantity = 5
                         },
                         new
                         {
                             Id = 6,
                             OrderId = 3,
                             ProductId = 6,
-                            Quantity = 0
+                            Quantity = 6
                         },
                         new
                         {
                             Id = 7,
                             OrderId = 4,
                             ProductId = 7,
-                            Quantity = 0
+                            Quantity = 7
                         },
                         new
                         {
                             Id = 8,
                             OrderId = 4,
                             ProductId = 8,
-                            Quantity = 0
+                            Quantity = 8
                         },
                         new
                         {
                             Id = 9,
                             OrderId = 5,
                             ProductId = 9,
-                            Quantity = 0
+                            Quantity = 9
                         },
                         new
                         {
                             Id = 10,
                             OrderId = 5,
                             ProductId = 10,
-                            Quantity = 0
+                            Quantity = 10
                         },
                         new
                         {
                             Id = 11,
                             OrderId = 6,
                             ProductId = 1,
-                            Quantity = 0
+                            Quantity = 1
                         },
                         new
                         {
                             Id = 12,
                             OrderId = 6,
                             ProductId = 3,
-                            Quantity = 0
+                            Quantity = 2
                         },
                         new
                         {
                             Id = 13,
                             OrderId = 7,
                             ProductId = 5,
-                            Quantity = 0
+                            Quantity = 3
                         },
                         new
                         {
                             Id = 14,
                             OrderId = 7,
                             ProductId = 7,
-                            Quantity = 0
+                            Quantity = 4
                         },
                         new
                         {
                             Id = 15,
                             OrderId = 8,
                             ProductId = 9,
-                            Quantity = 0
+                            Quantity = 5
                         },
                         new
                         {
                             Id = 16,
                             OrderId = 8,
                             ProductId = 2,
-                            Quantity = 0
+                            Quantity = 6
                         },
                         new
                         {
                             Id = 17,
                             OrderId = 9,
                             ProductId = 4,
-                            Quantity = 0
+                            Quantity = 7
                         },
                         new
                         {
                             Id = 18,
                             OrderId = 9,
                             ProductId = 6,
-                            Quantity = 0
+                            Quantity = 8
                         },
                         new
                         {
                             Id = 19,
                             OrderId = 10,
                             ProductId = 8,
-                            Quantity = 0
+                            Quantity = 9
                         },
                         new
                         {
                             Id = 20,
                             OrderId = 10,
                             ProductId = 10,
-                            Quantity = 0
+                            Quantity = 10
                         },
                         new
                         {
                             Id = 21,
                             OrderId = 11,
                             ProductId = 2,
-                            Quantity = 0
+                            Quantity = 1
                         },
                         new
                         {
                             Id = 22,
                             OrderId = 11,
                             ProductId = 4,
-                            Quantity = 0
+                            Quantity = 2
                         },
                         new
                         {
                             Id = 23,
                             OrderId = 12,
                             ProductId = 6,
-                            Quantity = 0
+                            Quantity = 3
                         },
                         new
                         {
                             Id = 24,
                             OrderId = 12,
                             ProductId = 8,
-                            Quantity = 0
+                            Quantity = 4
                         });
                 });
 
@@ -516,7 +516,7 @@ namespace CornerStore.Migrations
             modelBuilder.Entity("CornerStore.Models.Order", b =>
                 {
                     b.HasOne("CornerStore.Models.Cashier", "Cashier")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("CashierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -552,6 +552,11 @@ namespace CornerStore.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("CornerStore.Models.Cashier", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("CornerStore.Models.Order", b =>

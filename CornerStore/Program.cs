@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
 using AutoMapper.QueryableExtensions;
 using CornerStore.Models.DTOS.Default;
+using CornerStore.Models.DTOS.Detailed;
 using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,13 +47,38 @@ app.MapGet("/cashiers", (CornerStoreDbContext db, IMapper mapper) =>
 
 app.MapGet("/cashiers/{id}", (int id, CornerStoreDbContext db, IMapper mapper, string? expand) =>
 {
-    if (expand == null)
+    IQueryable query = db.Cashiers.Where(c => c.Id == id);
+
+    if (expand == "orders")
     {
-        return db.Cashiers.ProjectTo<DefaultCashierDTO>(mapper.ConfigurationProvider).SingleOrDefault(c => c.Id == id);
+        CashierExpandOrdersDTO cashierDTO = query.ProjectTo<CashierExpandOrdersDTO>(mapper.ConfigurationProvider).SingleOrDefault();
+        return cashierDTO != null ? Results.Ok(cashierDTO) : Results.NotFound();
+    }
+    else
+    {
+        DefaultCashierDTO cashierDTO = query.ProjectTo<DefaultCashierDTO>(mapper.ConfigurationProvider).SingleOrDefault();
+        return cashierDTO != null ? Results.Ok(cashierDTO) : Results.NotFound();
+    }
+});
+
+app.MapPost("/cashiers", (CornerStoreDbContext db, IMapper mapper, Cashier newCashier) =>
+{
+    try
+    {
+        db.Cashiers.Add(newCashier);
+        db.SaveChanges();
+
+        return Results.Created($"/cashiers/{newCashier.Id}", mapper.Map<DefaultCashierDTO>(newCashier));
+        }
+    catch (DbUpdateException)
+    {
+        return Results.BadRequest("Invalid Data");
     }
 });
 
 #endregion
+
+
 
 app.Run();
 

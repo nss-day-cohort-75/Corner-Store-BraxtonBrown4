@@ -16,4 +16,5 @@ public class Cashier
             return $"{FirstName} {LastName}";
         }
     }
+    public List<Order>? Orders { get; set; }
 }
