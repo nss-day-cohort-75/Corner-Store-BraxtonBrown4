@@ -69,7 +69,7 @@ app.MapPost("/cashiers", (CornerStoreDbContext db, IMapper mapper, Cashier newCa
         db.SaveChanges();
 
         return Results.Created($"/cashiers/{newCashier.Id}", mapper.Map<DefaultCashierDTO>(newCashier));
-        }
+    }
     catch (DbUpdateException)
     {
         return Results.BadRequest("Invalid Data");
@@ -78,7 +78,67 @@ app.MapPost("/cashiers", (CornerStoreDbContext db, IMapper mapper, Cashier newCa
 
 #endregion
 
+#region products
 
+app.MapGet("/products", (CornerStoreDbContext db, IMapper mapper, string? productName, string? categoryName) =>
+{
+    if (productName != null && categoryName != null)
+    {
+        return Results.Ok(db.Products.Where(p => p.ProductName == productName && p.Category.CategoryName == categoryName).ProjectTo<ProductsExpanCategoryDTO>(mapper.ConfigurationProvider));
+    }
+    else if (productName != null || categoryName != null)
+    {
+        return Results.Ok(db.Products.Where(p => p.ProductName == productName || p.Category.CategoryName == categoryName).ProjectTo<ProductsExpanCategoryDTO>(mapper.ConfigurationProvider));
+    }
+
+    return Results.Ok(db.Products.ProjectTo<ProductsExpanCategoryDTO>(mapper.ConfigurationProvider));
+});
+
+app.MapPost("/products", (CornerStoreDbContext db, IMapper mapper, Product newProduct) =>
+{
+    try
+    {
+        db.Products.Add(newProduct);
+        db.SaveChanges();
+
+        return Results.Created($"/products/{newProduct.Id}", mapper.Map<DefaultProductDTO>(newProduct));
+    }
+    catch (DbUpdateException)
+    {
+        return Results.BadRequest("Invalid Data");
+    }
+});
+
+app.MapPut("/products/{id}", (CornerStoreDbContext db, IMapper mapper, Product newProduct, int id) =>
+{
+    try
+    {
+        Product oldProduct = db.Products.SingleOrDefault(p => p.Id == id);
+
+        if (oldProduct == null)
+        {
+            return Results.NotFound();
+        }
+
+        if (id != newProduct.Id)
+        {
+            return Results.BadRequest("The ID in the URL does not match the ID in the request body.");
+        }
+
+        mapper.Map(newProduct, oldProduct);
+        db.SaveChanges();
+
+        return Results.Ok(mapper.Map<DefaultProductDTO>(oldProduct));
+    }
+    catch (DbUpdateException)
+    {
+        return Results.BadRequest("Invalid Data");
+    }
+
+
+});
+
+#endregion
 
 app.Run();
 

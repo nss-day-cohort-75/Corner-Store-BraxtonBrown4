@@ -29,11 +29,17 @@ public class AutoMapperProfiles : Profile
 
         #endregion
 
-        CreateMap<Category, DefaultCategoryDTO>();
-        CreateMap<OrderProduct, DefaultOrderProductDTO>();
+        #region Products
+
+        CreateMap<Product, Product>();
         CreateMap<Product, DefaultProductDTO>();
+        CreateMap<DefaultProductDTO, Product>();
+        CreateMap<Product, ProductsExpanCategoryDTO>();
+        CreateMap<ProductsExpanCategoryDTO, Product>();
 
+        #endregion
 
-        //CreateMap<convert thing 1, to thing 2>();
+        CreateMap<OrderProduct, DefaultOrderProductDTO>();
+        CreateMap<Category, DefaultCategoryDTO>();
     }
 }
