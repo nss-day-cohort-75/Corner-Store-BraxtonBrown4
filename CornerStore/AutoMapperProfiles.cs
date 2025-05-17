@@ -27,19 +27,30 @@ public class AutoMapperProfiles : Profile
         CreateMap<Order, OrderExpandOPsDTO>().ForMember(DTO => DTO.Total, opt => opt.MapFrom(order => order.OrderProducts.Sum(op => op.Product.Price * op.Quantity)));
         CreateMap<OrderExpandOPsDTO, Order>();
 
+        CreateMap<Order, OrderFullExpandDTO>().ForMember(DTO => DTO.Total, opt => opt.MapFrom(order => order.OrderProducts.Sum(op => op.Product.Price * op.Quantity)));
+        CreateMap<OrderFullExpandDTO, Order>();
+
         #endregion
 
         #region Products
 
         CreateMap<Product, Product>();
+
         CreateMap<Product, DefaultProductDTO>();
         CreateMap<DefaultProductDTO, Product>();
+
         CreateMap<Product, ProductsExpanCategoryDTO>();
         CreateMap<ProductsExpanCategoryDTO, Product>();
+
+        CreateMap<Product, ProductExpandCDTO>();
 
         #endregion
 
         CreateMap<OrderProduct, DefaultOrderProductDTO>();
+
+        CreateMap<OrderProduct, OrderProductExpandPDTO>();
+        CreateMap<OrderProductExpandPDTO, OrderProduct>();
+
         CreateMap<Category, DefaultCategoryDTO>();
     }
 }

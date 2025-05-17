@@ -140,6 +140,49 @@ app.MapPut("/products/{id}", (CornerStoreDbContext db, IMapper mapper, Product n
 
 #endregion
 
+#region orders
+
+app.MapGet("/orders/{id}", (int id, CornerStoreDbContext db, IMapper mapper) =>
+{
+    IQueryable query = db.Orders.Where(c => c.Id == id);
+
+    OrderFullExpandDTO cashierDTO = query.ProjectTo<OrderFullExpandDTO>(mapper.ConfigurationProvider).SingleOrDefault();
+    return cashierDTO != null ? Results.Ok(cashierDTO) : Results.NotFound();
+});
+
+app.MapGet("/orders", (CornerStoreDbContext db, IMapper mapper, DateTime? paidondate) =>
+{
+    if (paidondate != null)
+    {
+        return Results.Ok(db.Orders.Where(o => o.PaidOnDate == paidondate).ProjectTo<DefaultOrderDTO>(mapper.ConfigurationProvider));
+    }
+    else
+    {
+        return Results.Ok(db.Orders.ProjectTo<DefaultOrderDTO>(mapper.ConfigurationProvider));
+    }
+});
+
+app.MapDelete("/orders/{id}", (int id, CornerStoreDbContext db, IMapper mapper) =>
+{
+    Order order = db.Orders.SingleOrDefault(o => o.Id == id);
+
+    if (order == null)
+    {
+        return Results.NotFound();
+    }
+
+    db.Orders.Remove(order);
+    db.SaveChanges();
+
+    return Results.NoContent();
+});
+
+#endregion
+
+/*
+Create an Order (with products!)??? ask dave
+*/
+
 app.Run();
 
 //don't move or change this!
