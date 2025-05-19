@@ -177,10 +177,52 @@ app.MapDelete("/orders/{id}", (int id, CornerStoreDbContext db, IMapper mapper) 
     return Results.NoContent();
 });
 
+app.MapPost("/orders", (CornerStoreDbContext db, IMapper mapper, PostOrderWithJTsDTO newOrder) =>
+{
+    try
+    {
+        Order order = new Order
+        {
+            Id = newOrder.Id,
+            CashierId = newOrder.CashierId,
+            PaidOnDate = newOrder.PaidOnDate,
+            OrderProducts = newOrder.OrderProducts
+        };
+
+        db.Orders.Add(order);
+        db.SaveChanges();
+
+        Order savedOrder = db.Orders
+            .Include(o => o.OrderProducts)
+            .ThenInclude(op => op.Product)
+            .FirstOrDefault(o => o.Id == order.Id);
+
+        return Results.Created($"/orders/{order.Id}", mapper.Map<OrderExpandOPsDTO>(savedOrder));
+
+    }
+    catch (DbUpdateException)
+    {
+        return Results.BadRequest("Invalid Data");
+    }
+});
+
 #endregion
 
 /*
-Create an Order (with products!)??? ask dave
+{
+  "id": 0,
+  "cashierId": 1,
+  "total": 0,
+  "paidOnDate": "2025-05-19T14:45:12.729Z",
+  "orderProducts": [
+    {
+      "id": 0,
+      "productId": 1,
+      "orderId": 0,
+      "quantity": 2
+    }
+  ]
+}
 */
 
 app.Run();
