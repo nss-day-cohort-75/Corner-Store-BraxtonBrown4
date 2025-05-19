@@ -38,7 +38,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-#region cashiers
 
 app.MapGet("/cashiers", (CornerStoreDbContext db, IMapper mapper) =>
 {
@@ -75,10 +74,6 @@ app.MapPost("/cashiers", (CornerStoreDbContext db, IMapper mapper, Cashier newCa
         return Results.BadRequest("Invalid Data");
     }
 });
-
-#endregion
-
-#region products
 
 app.MapGet("/products", (CornerStoreDbContext db, IMapper mapper, string? productName, string? categoryName) =>
 {
@@ -137,10 +132,6 @@ app.MapPut("/products/{id}", (CornerStoreDbContext db, IMapper mapper, Product n
 
 
 });
-
-#endregion
-
-#region orders
 
 app.MapGet("/orders/{id}", (int id, CornerStoreDbContext db, IMapper mapper) =>
 {
@@ -205,8 +196,6 @@ app.MapPost("/orders", (CornerStoreDbContext db, IMapper mapper, PostOrderWithJT
         return Results.BadRequest("Invalid Data");
     }
 });
-
-#endregion
 
 /*
 {
